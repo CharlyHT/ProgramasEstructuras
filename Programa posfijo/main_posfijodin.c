@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
-//#include "TADPilaDin.h"
-#include "TADPilaEst.h"
+#include "TADPilaDin.h"
+//#include "TADPilaEst.h"
 #define MAX_CADENA 100
 void CompCad(string expresion);
 void Posfijo(string expresion);
@@ -237,4 +237,3 @@ int jerarquia(char operador) //CHECA LA JERARQUIA DE LOS OPERADORES
 	}
 	return valor;
 }
-

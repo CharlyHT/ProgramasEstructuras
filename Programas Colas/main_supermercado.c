@@ -43,7 +43,6 @@ time_client/=mcd;
 while(TRUE)
 	{
 	Ms(mcd); //TIEMPO BASE 
-	time_base++;
 	if(time_base%time_client==0)
 		{
 		client++;
@@ -107,6 +106,7 @@ while(TRUE)
 			exit(0);
 			}	
 		}
+	time_base++;
 	}	
 }
 

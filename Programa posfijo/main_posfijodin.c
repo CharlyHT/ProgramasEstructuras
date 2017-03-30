@@ -5,27 +5,22 @@
 #include "TADPilaDin.h"
 //#include "TADPilaEst.h"
 #define MAX_CADENA 100
-void CompCad(string expresion);
+void Parentesis(string expresion);
 void Posfijo(string expresion);
 void EvaluarPos(string expresion);
 int jerarquia(char operador);
 main()
 {
 	char expresion[MAX_CADENA];
-	int tam_cad,i,j;
-	pila pila1;
-	elemento caracter;
-	Initialize(&pila1);
 	printf(" INFIJO ======> POSFIJO\nINTRODUZCA LA CADENA A TRANSFORMAR\nNOTA: DENTRO DE LA EXPRESION SOLO PUEDES USAR LETRA MAYUSCULAS\n ");
 	scanf("%s",expresion);
-	CompCad(expresion);
+	Parentesis(expresion);
 	Posfijo(expresion);
-	
 	system("PAUSE");
 	
 	
 }
-void CompCad(string expresion) //COMPROBACION DE LOS PARENTESIS
+void Parentesis(string expresion) //COMPROBACION DE LOS PARENTESIS
 {
 	int i,tam_cad;
 	tam_cad=strlen(expresion);
@@ -63,7 +58,7 @@ void CompCad(string expresion) //COMPROBACION DE LOS PARENTESIS
 void Posfijo(string expresion)
 {
 	int tam_cad,i,j=0,aux_pila,aux_exp;
-	elemento el,aux_el;
+	elemento el;
 	pila pila1;
 	Initialize(&pila1);
 	tam_cad=strlen(expresion);
@@ -105,9 +100,14 @@ void Posfijo(string expresion)
 			}
 			else if(aux_pila>aux_exp)
 			{
-				el=Pop(&pila1);
-				posfija[j]=el.carac;
-				j++;
+				while(aux_pila>aux_exp)
+				{
+					el=Pop(&pila1);
+					posfija[j]=el.carac;
+					j++;
+					if(Empty(&pila1)!=TRUE) aux_pila=jerarquia((Top(&pila1)).carac);
+					else break;	
+				}
 				el.carac=expresion[i];
 				Push(&pila1,el);
 			}
@@ -141,10 +141,11 @@ void EvaluarPos(string expresion)
 	pila pila1;
 	elemento el,el2;
 	Initialize(&pila1);
+	tam_cad=strlen(expresion);
 	double abc[27];
 	for(i=0;i<27;i++)	abc[i]=0; //DECLARAR ARREGLO EN 0
 	printf("EVALUACION INTRODUZCA LOS VALORES DE LAS LETRAS\nNOTA: NO PUEDE IGUALAR UNA LETRA CON 0\n");
-	for(i=0;i<27;i++)
+	for(i=0;i<tam_cad;i++)
 	{
 		if(expresion[i]>64 && (expresion[i]<91))
 		{
@@ -155,7 +156,6 @@ void EvaluarPos(string expresion)
 			}
 		}
 	}	
-	tam_cad=strlen(expresion);
 	for(i=0;i<tam_cad;i++)
 	{
 		if(expresion[i]>64 && (expresion[i]<91))

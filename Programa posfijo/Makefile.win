@@ -1,15 +1,15 @@
-# Project: Posfijo
+# Project: PosfijoDin
 # Makefile created by Dev-C++ 5.11
 
 CPP      = g++.exe
 CC       = gcc.exe
 WINDRES  = windres.exe
-OBJ      = main_posfijo.o TADPilaEst.o
-LINKOBJ  = main_posfijo.o TADPilaEst.o
+OBJ      = main_posfijodin.o TADPilaDin.o
+LINKOBJ  = main_posfijodin.o TADPilaDin.o
 LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib" -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc
 INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
 CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
-BIN      = Posfijo.exe
+BIN      = PosfijoDin.exe
 CXXFLAGS = $(CXXINCS) 
 CFLAGS   = $(INCS) 
 RM       = rm.exe -f
@@ -24,8 +24,8 @@ clean: clean-custom
 $(BIN): $(OBJ)
 	$(CC) $(LINKOBJ) -o $(BIN) $(LIBS)
 
-main_posfijo.o: main_posfijo.c
-	$(CC) -c main_posfijo.c -o main_posfijo.o $(CFLAGS)
+main_posfijodin.o: main_posfijodin.c
+	$(CC) -c main_posfijodin.c -o main_posfijodin.o $(CFLAGS)
 
-TADPilaEst.o: TADPilaEst.c
-	$(CC) -c TADPilaEst.c -o TADPilaEst.o $(CFLAGS)
+TADPilaDin.o: TADPilaDin.c
+	$(CC) -c TADPilaDin.c -o TADPilaDin.o $(CFLAGS)

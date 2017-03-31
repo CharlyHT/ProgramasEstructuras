@@ -9,7 +9,8 @@ int Mcd(int num1,int num2);
 int ExtMcd(int num1,int num2);
 main()
 {
-int i,j,num_cajeros,time_client,*cajeros,*dispo,mcd,aux;
+int i,j,num_cajeros,time_client,*cajeros,mcd,aux;
+boolean *dispo;
 unsigned int time_base=0,client=0;
 elemento aux_element;
 srand(time(NULL));
@@ -18,26 +19,28 @@ puts("INTRODUZCA EL NUMERO DE CAJEROS DEL SUPERMERCADO :");
 scanf("%d",&num_cajeros);
 if(num_cajeros==0 || (num_cajeros>MAX_CAJEROS)) exit(1);
 cajeros=(int*)malloc(num_cajeros*sizeof(int));
-dispo=(int*)malloc(num_cajeros*sizeof(int));
+dispo=(boolean*)malloc(num_cajeros*sizeof(boolean));
 cola cola_cajeros[num_cajeros];
 for(i=0;i<num_cajeros;i++)
 	{
 	Initialize(&cola_cajeros[i]);
-	dispo[i]=1;
+	dispo[i]=FALSE;
 	printf("TIEMPO DE ATENCION DE CAJERA %d (MS):\n ",i+1);
 	scanf("%d",cajeros+i);
 	}
 puts("INTRODUCE EL TIEMPO DE LLEGADA DE CADA UNO DE LOS CLIENTES:");
 scanf("%d",&time_client);
 ClearScreen();
-puts("THE ULTIMATE MARKET \n CAJEROS");
 mcd=Mcd(cajeros[0],time_client);
 for(i=1;i<num_cajeros;i++) mcd=Mcd(mcd,cajeros[i]);
+printf("THE ULTIMATE MARKET \n CAJEROS %d ",mcd);
 for(i=0;i<num_cajeros;i++) 
 	{
-		cajeros[i]/=mcd;
-		MoveCursor((i+1)*10,3);
-		printf("%d",i+1);
+	MoveCursor((i+1)*10,3);
+	printf("%d",i+1);
+	MoveCursor((i+1)*10,2);
+	printf("%d",cajeros[i]);
+	cajeros[i]/=mcd;
 	}
 time_client/=mcd;
 while(TRUE)
@@ -53,10 +56,11 @@ while(TRUE)
 		printf("%d",client);
 		}
 	for(i=0;i<num_cajeros;i++)
-		if(time_base%cajeros[i]==0 || (dispo[i]==0))
+		if(time_base%cajeros[i]==0 || (dispo[i]==TRUE))
+			{
 			if(Empty(&cola_cajeros[i])!=TRUE)
 				{
-				dispo[i]=1;
+				dispo[i]=FALSE;
 				aux=SizeCola(&cola_cajeros[i]);
 				aux_element=Dequeue(&cola_cajeros[i]);
 				MoveCursor(((i+1)*10)-2,4);
@@ -78,12 +82,14 @@ while(TRUE)
 					printf("     ",aux_element.n);	
 					}		
 				}
-			else if (dispo[i]==1)
-			{
-			dispo[i]=0;
-			MoveCursor(((i+1)*10)-2,4);
-			printf("      ");	
+			else if (dispo[i]==FALSE)
+				{
+				dispo[i]=TRUE;
+				MoveCursor(((i+1)*10)-2,4);
+				printf("      ");	
+				}
 			}
+		
 	if(client>=100)
 		{
 		MoveCursor(0,2);

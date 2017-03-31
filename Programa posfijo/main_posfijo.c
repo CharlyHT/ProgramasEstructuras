@@ -100,7 +100,7 @@ void Posfijo(string expresion)
 			}
 			else if(aux_pila>aux_exp)
 			{
-				while(aux_pila>aux_exp)
+				while(aux_pila>aux_exp || (aux_pila==aux_exp) )
 				{
 					el=Pop(&pila1);
 					posfija[j]=el.carac;

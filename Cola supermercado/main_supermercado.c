@@ -96,7 +96,7 @@ while(TRUE)
 		printf("CERRAREMOS LA TIENDA EN CUANTO LAS COLAS SE VACIEN ");
 		j=0;
 		for(i=0;i<num_cajeros;i++)
-			if(Empty(&cola_cajeros[i])!=TRUE)
+			if(Empty(&cola_cajeros[i])==TRUE)
 			{
 			j++;
 			break;
